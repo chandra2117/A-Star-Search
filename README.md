@@ -180,7 +180,6 @@ J 0 <br>
 <h2>Output</h2>
 <hr>
 <img width="1365" height="739" alt="image" src="https://github.com/user-attachments/assets/c9e11dd9-524b-4967-ae57-663f058d0aac" />
-
 <hr>
-Path found: ['A', 'F', 'G', 'I', 'J']
-<hr>
+<h2>Result</h2>
+<p>Thus the program was successfully executed.</p>
