@@ -48,36 +48,29 @@
 
 <hr>
 <h2>Program</h2>
+
 ```
 from collections import defaultdict
-
 H_dist = {}
-
 def aStarAlgo(start_node, stop_node):
     open_set = set(start_node)
     closed_set = set()
     g = {}               # store distance from starting node
     parents = {}         # parents contains an adjacency map of all nodes
-    
     # distance of starting node from itself is zero
     g[start_node] = 0
-    
     # start_node is root node i.e. it has no parent
     parents[start_node] = start_node
-    
     while len(open_set) > 0:
         n = None
-        
         # node with lowest f() is found
         for v in open_set:
             if n is None or g[v] + heuristic(v) < g[n] + heuristic(n):
                 n = v
-        
         # if n is None, no path can be found
         if n is None:
             print('Path does not exist!')
             return None
-        
         if n == stop_node or Graph_nodes[n] is None:
             pass
         else:
@@ -106,15 +99,12 @@ def aStarAlgo(start_node, stop_node):
             path.reverse()
             print('Path found: {}'.format(path))
             return path
-        
         # move n from open_set to closed_set
         open_set.remove(n)
         closed_set.add(n)
-    
     print('Path does not exist!')
     return None
-
-def get_neighbors(v):
+    def get_neighbors(v):
     """
     Retrieves a value from the Graph_nodes dictionary based on the provided key.
 
@@ -124,42 +114,37 @@ def get_neighbors(v):
     Returns:
     list of tuples: Each tuple contains (neighbor, cost)
     """
-    if v in Graph_nodes:
-        return Graph_nodes[v]
-    else:
-        return None
+        if v in Graph_nodes:
+            return Graph_nodes[v]
+        else:
+            return None
 
-def heuristic(n):
-    return H_dist[n]
+    def heuristic(n):
+        return H_dist[n]
 
-if __name__ == "__main__":
-    graph = defaultdict(list)
-    n, e = map(int, input("Enter number of nodes and edges: ").split())
+    if __name__ == "__main__":
+        graph = defaultdict(list)
+        n, e = map(int, input("Enter number of nodes and edges: ").split())
+        print("Enter edges (u v cost):")
+        for i in range(e):
+            u, v, cost = map(str, input().split())
+            t = (v, float(cost))
+            graph[u].append(t)
+            t1 = (u, float(cost))
+            graph[v].append(t1)  
+        print("Enter heuristic values (node h):")
+        for i in range(n):
+            node, h = map(str, input().split())
+            H_dist[node] = float(h)
     
-    print("Enter edges (u v cost):")
-    for i in range(e):
-        u, v, cost = map(str, input().split())
-        t = (v, float(cost))
-        graph[u].append(t)
-        t1 = (u, float(cost))
-        graph[v].append(t1)
-    
-    print("Enter heuristic values (node h):")
-    for i in range(n):
-        node, h = map(str, input().split())
-        H_dist[node] = float(h)
-    
-    print("Heuristic values:", H_dist)
-    
-    Graph_nodes = graph
-    print("Graph adjacency list:", dict(graph))
-    
-    start = input("Enter start node: ")
-    goal = input("Enter goal node: ")
-    
-    aStarAlgo(start, goal)
+        print("Heuristic values:", H_dist)
+        Graph_nodes = graph
+        print("Graph adjacency list:", dict(graph))
+        start = input("Enter start node: ")
+        goal = input("Enter goal node: ")
+        aStarAlgo(start, goal)
 ```
-<h2>Sample Graph I</h2>
+<h2>Sample Graph</h2>
 <hr>
 
 ![image](https://github.com/natsaravanan/19AI405FUNDAMENTALSOFARTIFICIALINTELLIGENCE/assets/87870499/b1377c3f-011a-4c0f-a843-516842ae056a)
